@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-container ">
+<thead class="is-italic">
+<th>
+    Codigo
+</th>
+<th>
+    Nombre
+</th>
+<th>
+    Unidades Curriculares
+</th>
+</thead>
+<tbody class="has-text-weight-bold">
+{% for i in object_list %}
+<tr>
+    <td>
+        {{ i.codigo }}
+    </td>
+    <td>
+        {{ i.nombre}}
+    </td>
+    <td>
+        {{ i.unidadesC }}
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="static/images/icon.png">
+    <meta name="description" content=" Sistema para el Creacion y Gestión de horarios">
+    <meta name="keywords" content="UPTT, Gestion de Horarios, Alfonso, Leonel">
+    <title>Sistema de Horario UPTT</title>
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'horario/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'horario/css/bulma.css' %}">
+    <link rel="stylrsheet" href="{% static 'horario/iconos/css/fontawesome.css' %}">
+    <script src="{% static 'horario/iconos/js/all.js' %}"></script>
+    <script src="{% static 'horario/js/jquery.js' %}"></script>
+    <script src="{% static 'horario/js/script.js' %}"></script>
+
+<script>
+$("#showModal").click(function () {
+    $(".modal").addClass("is-active");
+    console.log("modal cliqueado");
+});
+$(".modal-close").click(function () {
+    $(".modal").removeClass("is-active");
+    console.log("modal cliqueado");
+});
+function activo() {
+    $(".modal").addClass("is-active");
+}
+function cerrar() {
+    $(".modal").removeClass("is-active");
+ }
+</script>
+</head>
+<body>
+<header class="head">
+    <div class="titulo navbar-brand">
+        <a href="/" >
+            <img class="upttlogo image" src="{% static 'horario/images/uptt.png' %}" width="60px" height="60px">
+            <h3 class="is-4 is-vertical">Sistema de Horario UPTT</h3>
+        </a>
+    </div>
+    <div class="navbar-menu has-text-centered ">
+        <div class="navbar-item has-dropdown is-hoverable ">
+            <a  href="{% url 'profesores' %}"  class="navbar-link"><i class="fas fa-user"></i>profesores</a>
+            <div class="navbar-dropdown">
+            <a href="{% url 'profesores' %}" class="navbar-item">Primer año</a>
+            </div>
+
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a href="{% url 'materia' %}" class="navbar-link"><i class="fa fa-book"></i>Materias </a>
+            <div class="navbar-dropdown">
+                <a href="{% url 'materia nueva' %}" class="navbar-item">Nueva Materia</a>
+            </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a href="{% url 'lista de secciones' %}" class="navbar-link"><i class="fa fa-clock"></i>Secciones</a>
+        </div>
+         <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"><i class="fa fa-chalkboard-teacher"></i>Salones</a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item is-hoverable is-right">
+                <a class="navbar-link is-arrowless"><i class="fa fa-times-circle"></i>Salir</a>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="section">
+    <div class="container">
+        <h1 class="title">hola usuario</h1>
+        {% block content %}{% endblock %}
+    </div>
+</section>
+<footer class="footer tabs ">
+    <div class="is-tab">
+        <a class="navbar-item" href="{% url 'horario de profesores' %}">Horarios de Profesores</a>
+    </div>
+    <div class="is-tab">
+        <a class="navbar-item" href="{% url 'horario de salones' %}">Horarios de Salones</a>
+    </div>
+    <div class="is-tab">
+        <a class="navbar-item" href="{% url 'horario de secciones' %}">Horarios por Secciones</a>
+    </div>
+</footer>
+</body>
+</html>
+
+<body>
+

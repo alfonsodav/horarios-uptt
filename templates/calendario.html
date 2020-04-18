@@ -1,0 +1,52 @@
+{% extends 'base_home.html' %}
+{% block content %}
+<table class="table">
+    <thead>
+    <th>
+        hora
+    </th>
+    <th>
+        Lunes
+    </th>
+    <th>
+        martes
+    </th>
+    <th>
+        Miercoles
+    </th>
+    <th>
+        Jueves
+    </th>
+    <th>
+        Viernes
+    </th>
+    <th>
+        sabado
+    </th>
+    <th>
+        domingo
+    </th>
+    </thead>
+    <tbody>
+    {% for i in "1234567891"%}
+    <tr>
+    <td>
+        {{ "7" }}
+    </td>
+    {% for foo in "lmmjvsd" %}
+    <td class="objetivo" id={{ foo }} name="7"> {{ foo }} vacio </td>
+    {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="mt-5">
+<table class="table">
+{% for T in trimestre %}
+    {% for materia in T.materias.all %}
+    <td class="horas" id={{ materia.codigo }}>{{ materia.nombre }}</td>
+    {% endfor %}
+{% endfor %}
+</table>
+</div>
+{% endblock %}

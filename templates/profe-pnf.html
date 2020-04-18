@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-container  has-text-centered ">
+<thead>
+<th>
+    nombre
+</th>
+<th>
+    PNF
+</th>
+<th>
+    Materias
+</th>
+</thead>
+<tbody class="has-text-weight-bold">
+{{ pnf }}
+{% if profesor %}
+{% for i in profesor %}
+<tr>
+    <td>
+        {{ i.nombre}}
+    </td>
+    <td>
+        {{ i.pnf }}
+    </td>
+    <td>
+    {% for m in i.materias.all %}
+        <li class="list-item ">{{ m }}</li>
+    {% endfor %}
+    </td>
+</tr>
+{% endfor %}
+{% endif %}
+
+
+</tbody>
+</table>
+{% endblock %}

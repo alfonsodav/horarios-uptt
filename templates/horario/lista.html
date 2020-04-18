@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+  <a href="{% url 'nuevo profesor' %}" class="is-pulled-right button is-success m-4">Registrar Profesor</a>
+</div>
+<table class="table table-container  has-text-centered ">
+<thead class="has-text-centered">
+<th class="">
+    nombre
+</th>
+<th class="">
+    PNF
+</th>
+<th class="">
+    Materias
+</th>
+<th class="">
+    Editar
+</th>
+<th class="">
+    Eliminar
+</th>
+</thead>
+<tbody class="has-text-weight-bold ">
+{% for i in object_list %}
+<tr>
+    <td>
+        {{ i.nombre}}
+    </td>
+    <td>
+        {{ i.pnf }}
+    </td>
+    <td>
+    {% for m in i.materias.all %}
+        <li class="list-item ">{{ m }}</li>
+    {% endfor %}
+    </td>
+    <td id="showModal" class="has-text-centered">
+        <i class="fa fa-edit has-text-info has-text-centered" onclick="popUp('profesor/{{ i.id }}')"></i>
+    </td>
+    <td>
+        <i class="fa fa-times has-text-danger is-center"  onclick="popUp('borrar-profesor/{{ i.id }}')" title="borrar profesor" ></i>
+    </td>
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="modal">
+<div class="modal-background"></div>
+<div class="modal-card">
+    <header class="modal-card-head">
+        <p class="modal-card-title">¿Esta seguro que desea borrar este elemento?</p>
+        <button class="delete" aria-label="close" onclick="cerrar()"></button>
+    </header>
+    <section class="modal-card-body">
+
+<form class="field has-text-centered" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+<input class="control" type="submit">
+</form>
+    </section>
+</div>
+</div>
+{% endblock %}

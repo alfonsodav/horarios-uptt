@@ -1,0 +1,257 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+.sidebar-nav {
+    padding: 20px;
+    height:auto;
+    width: 16%;
+    position: fixed;
+    top: 25%;
+    left: 0;
+    border-radius: 0 5px 5px 0;
+    background-color: dodgerblue;
+}
+.sidebar-nav a {
+    padding: 6px 6px 6px 20px;
+    text-decoration: none;
+    font-size: 1.8vw;
+    color: white;
+    display: block;
+}
+.sidebar-nav a:hover {
+    color: #3221ff;
+}
+.main{
+    margin-left: 20%;
+    padding-right: 20px;
+    text-align: justify;
+}/*
+.tabla-repor{
+    border: #7fc0ff;
+    border-style: solid;
+}
+.tabla-repor th{
+    margin-left: auto;
+}*/
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+th, td {
+    text-align: center !important;
+    padding: 16px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+}
+thead{
+    background-color: dodgerblue;
+}
+.logo{
+    float:right;
+    width: 20%;
+    left: 25vw;
+    justify-content: flex-start;
+}
+.logo img{
+    width: 30%;
+}
+.upttlogo{
+    width:60px;
+    height:60px;
+    float: left;
+}
+.titulo{
+
+}
+.head{
+    display: inline-flex;
+    width: 100%;
+    border: 0 solid #cddcdc;
+    border-bottom-width: 2px;
+    background: #f2f2f2 linear-gradient(to bottom, rgba(42, 63, 255, 0.66), rgba(0, 0, 255, 0.3));
+    top:0;
+}
+.dropbtn {
+    background-color: #1e90ff;
+    color: white;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+
+    min-width: 50px;
+    z-index: 1;
+    margin-top: -50px
+}
+.dropdown-content a {
+
+    padding: 5px 5px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {background-color: #1e90ff;}
+.dropdown:hover .dropdown-content {display: block;
+margin-left: 100%;
+background-color: #1e90ff;
+}
+.dropdown:hover .dropbtn {background-color: #1e90ff;}
+.dropbtn a:hover{ color: blue}
+
+.tool-bar{
+    display: inline-flex;
+    background-color: #1e90ff;
+    width: 100%;
+    box-shadow: 1px 3px 1px darkgray;
+
+}
+.tool-bar form {
+    float: right;
+    justify-content: flex-end;
+
+}
+.tool-bar .print{
+    margin-right: 55%;
+}
+.volver{
+    color: blue;
+    text-decoration: none;
+    font-weight: bold;
+    padding-right: 5%;
+    padding-top: 4px;
+}
+
+.nav > li {
+				float:left;
+			}
+
+			.nav li a {
+                text-decoration:none;
+				padding:10px 12px;
+				display:block;
+			}
+ul, ol {
+				list-style:none;
+			}
+
+			.nav li ul {
+				display:none;
+				position:absolute;
+				min-width:140px;
+			}
+
+			.nav li:hover > ul {
+				display:block;
+			}
+
+			.nav li ul li {
+				position:relative;
+			}
+
+			.nav li ul li ul {
+				right:-140px;
+				top:0;
+			}
+.footer{
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    padding: 1% !important;
+}
+.navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
+    background-color: transparent !important;
+}
+a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active {
+    background-color: transparent !important;
+}
+.field p{
+    padding: 10px
+}
+.m-1{
+    margin: 0.5rem;
+}
+.m-2{
+    margin: 1rem;
+}
+.m-3{
+    margin: 1.5rem;
+}
+.m-4{
+    margin: 2rem;
+}
+.m-5{
+    margin: 3rem;
+}
+.ml-1{
+    margin: 0.5rem;
+}
+.ml-2{
+    margin: 1rem;
+}
+.ml-3{
+    margin: 1.5rem;
+}
+.ml-4{
+    margin: 2rem;
+}
+.ml-5{
+    margin: 3rem;
+}
+.mr-1{
+    margin: 0.5rem;
+}
+.mr-2{
+    margin: 1rem;
+}
+.mr-3{
+    margin: 1.5rem;
+}
+.mr-4{
+    margin: 2rem;
+}
+.mr-5{
+    margin: 3rem;
+}
+.m-1{
+    margin: 0.5rem;
+}
+.mt-2{
+    margin: 1rem;
+}
+.mt-3{
+    margin: 1.5rem;
+}
+.mt-4{
+    margin: 2rem;
+}
+.mt-5{
+    margin: 3rem;
+}
+.mb-1{
+    margin: 0.5rem;
+}
+.mb-2{
+    margin: 1rem;
+}
+.mb-3{
+    margin: 1.5rem;
+}
+.mb-4{
+    margin: 2rem;
+}
+.mb-5{
+    margin: 3rem;
+}

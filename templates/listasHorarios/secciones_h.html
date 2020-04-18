@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+    <h5 class="mt-3 has-shadow">Secciones sin Horarios </h5>
+</div>
+
+<table class="table table-container  has-text-centered ">
+<thead class="has-text-centered">
+<th>
+    Codigo
+</th>
+<th>
+    PNF
+</th>
+<th>
+    Trimestre
+</th>
+<th >
+    Modalidad
+</th>
+
+<th>
+    horario
+</th>
+</thead>
+<tbody class="has-text-weight-bold ">
+{% for i in secciones %}
+    {% if i not in  conHorario %}
+<tr>
+    <td>
+        {{ i}}
+    </td>
+    <td>
+        {{ i.pnf }}
+    </td>
+    <td>
+        {{ i.trimestre }}
+    </td>
+    <td>
+        {{ i.modalidad }}
+    </td>
+    <td id="showModal" class="has-text-centered">
+        <i class="fa fa-edit has-text-info has-text-centered" onclick="popUp('profesor/{{ i.id }}')"></i>
+    </td>
+
+</tr>
+    {% endif %}
+{% endfor %}
+</tbody>
+</table>
+
+<div class="content">
+    <h5 class="m-3 has-shadow">Secciones con Horarios </h5>
+</div>
+<table class="table table-container  has-text-centered ">
+<thead class="has-text-centered">
+<th class="">
+    Codigo
+</th>
+<th class="">
+    PNF
+</th>
+<th class="">
+    Trimestre
+</th>
+<th class="">
+    Modalidad
+</th>
+<th class="">
+    horario
+</th>
+</thead>
+<tbody class="has-text-weight-bold ">
+
+{% for i in secciones  %}
+    {% if i in conHorario %}
+<tr>
+    <td>
+        {{ i}}
+    </td>
+    <td>
+        {{ i.pnf }}
+    </td>
+    <td>
+        {{ i.trimestre }}
+    </td>
+    <td>
+        {{ i.modalidad }}
+    </td>
+    <td id="showModal" class="has-text-centered">
+        <i class="fa fa-edit has-text-info has-text-centered" onclick="popUp('profesor/{{ i.id }}')"></i>
+    </td>
+
+</tr>
+    {% endif %}
+
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

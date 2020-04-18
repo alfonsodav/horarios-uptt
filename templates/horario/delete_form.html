@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<form class="field has-text-centered" method="post">{% csrf_token %}
+    <h4 class="">¿Estas seguro de que deseas eliminar este elemento?</h4>
+    {{ form.as_p }}
+<input class="control" type="submit">
+</form>
+</div>
+{% endblock %}

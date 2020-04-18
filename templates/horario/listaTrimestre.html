@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-container ">
+<thead>
+<th>
+    nombre
+</th>
+<th>
+    Materias
+</th>
+</thead>
+<tbody class="has-text-weight-bold">
+{% for i in object_list %}
+<tr>
+    <td>
+        {{ i.codigo }}
+    </td>
+<td>
+    {% for m in i.materias.all %}
+        <li>{{ m }}</li>
+    {% endfor %}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
