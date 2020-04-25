@@ -1,0 +1,63 @@
+{% extends 'base_home.html' %}
+{% block content %}
+<div>
+    <form class="field has-text-centered" method="post" >{% csrf_token %}
+        <span>{{ form.codigo }}</span>
+        <span>{{ form.seccion }}</span>
+        <div  class="is-hidden">
+            <textarea id="id_posicion" name="posicion"></textarea>
+        </div>
+        <input class="control" type="submit">
+    </form>
+</div>
+<table class="table">
+    <thead>
+    <th>
+        hora
+    </th>
+    <th>
+        Lunes
+    </th>
+    <th>
+        martes
+    </th>
+    <th>
+        Miercoles
+    </th>
+    <th>
+        Jueves
+    </th>
+    <th>
+        Viernes
+    </th>
+    <th>
+        sabado
+    </th>
+    <th>
+        domingo
+    </th>
+    </thead>
+    <tbody>
+    {% for i in "abcdefghijklmnop"%}
+    <tr>
+    <td class="hora">
+
+    </td>
+    {% for foo in "lmMjvsd" %}
+    <td class="objetivo" id={{ foo }} name={{ i }}> {{ foo }} vacio </td>
+    {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="mt-3 mb-5">
+<table class="table">
+{% for T in trimestre %}
+    {% for materia in T.materias.all %}
+    <td class="horas" id={{ materia.codigo }}>{{ materia.nombre }}</td>
+    {% endfor %}
+{% endfor %}
+</table>
+</div>
+{% endblock %}
+
