@@ -58,20 +58,33 @@ function cerrar() {
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
             <a href="{% url 'lista de secciones' %}" class="navbar-link"><i class="fa fa-clock"></i>Secciones</a>
+            <div class="navbar-dropdown">
+                <a href="{% url 'crear seccion' %}" class="navbar-item">Nueva Seccion</a>
+            </div>
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"><i class="fa fa-chalkboard-teacher"></i>Salones</a>
+            <a href="{% url 'trimestres' %}" class="navbar-link"><i class="fa fa-chalkboard-teacher"></i>Trimestres</a>
+             <div class="navbar-dropdown">
+                <a href="{% url 'nuevo trimestre' %}" class="navbar-item">Nuevo Trimestre</a>
+            </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a href="{% url 'home' %}" class="navbar-link"><i class="fa fa-chalkboard-teacher"></i>Salones</a>
+             <div class="navbar-dropdown">
+                <a href="{% url 'home' %}" class="navbar-item">Nuevo Salon</a>
+            </div>
         </div>
         <div class="navbar-end">
             <div class="navbar-item is-hoverable is-right">
-                <a class="navbar-link is-arrowless"><i class="fa fa-times-circle"></i>Salir</a>
+                {% if user.is_authenticated %}
+                <h4>{{ user.username }}</h4><a href="{% url "salir" %}" class="navbar-link is-arrowless"><i class="fa fa-times-circle"></i>Salir</a>
+                {% endif %}
             </div>
         </div>
     </div>
 </header>
 <section class="section">
     <div class="container">
-        <h1 class="title">hola usuario</h1>
         {% block content %}{% endblock %}
     </div>
 </section>

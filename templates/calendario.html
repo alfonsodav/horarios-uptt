@@ -28,19 +28,19 @@
     </th>
     </thead>
     <tbody>
-    {% for i in "1234567891"%}
+    {% for i in "abcdefghijklmnop"%}
     <tr>
-    <td>
-        {{ "7" }}
+    <td class="hora">
+
     </td>
-    {% for foo in "lmmjvsd" %}
-    <td class="objetivo" id={{ foo }} name="7"> {{ foo }} vacio </td>
+    {% for foo in "lmMjvsd" %}
+    <td class="objetivo" id={{ foo }} name={{ i }}> {{ foo }} vacio </td>
     {% endfor %}
     </tr>
     {% endfor %}
     </tbody>
 </table>
-<div class="mt-5">
+<div class="mt-3 mb-5">
 <table class="table">
 {% for T in trimestre %}
     {% for materia in T.materias.all %}

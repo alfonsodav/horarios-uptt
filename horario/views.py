@@ -1,36 +1,105 @@
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.views import generic
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .models import Materias, PNF, Profesores, Secciones, Trimestre, Horarios, Salones
-from .form import MateriaForm
+from .form import MateriaForm, HorarioForm
+import json
 
 
 def index(request):
-    trimestre = Trimestre.objects.filter(codigo="03T3")
-    return (
-        render(request, 'calendario.html',
-               context={'trimestre': trimestre}
-               )
-    )
+    if request.user.is_authenticated:
+        return render(request, 'calendario.html', {})
+    else:
+        if request.method == 'POST':
+
+            username = request.POST.get('username', None)
+            password = request.POST.get('password', None)
+
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                return render(request, 'login.html', {'user': username})
+
+        return render(request, 'login.html', {})
 
 
-def Horario_seccion(request, id_seccion):
+def redireccion(request):
+    if request.method == "POST":
+        return redirect('home')
 
-    seccion = get_list_or_404(PNF, id=id_seccion)
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+#                                              ################# Horarios ##################
+
+
+def HorarioDetail(request, id):
+
+    horario = get_object_or_404(Horarios, id=id)
 
     try:
-        profesor = Profesores.objects.filter(pnf__nombre=seccion)
+        posicion = json.loads(horario.posicion)
+
         return (
-            render(request, "seccion_h.html",
-                   context={'profesor': profesor, 'seccion': seccion},
+            render(request, "horario/horarios_detail.html",
+                   context={'horarios': horario, 'posicion': posicion},
                    )
         )
-    except (KeyError, Profesores.DoesNotExist):
-        return render(request, 'horario/lista.html', {
-            'question': seccion,
-            'error_message': "Ese PNF no existe, por favor escoja otro.",
+    except (KeyError, Horarios.DoesNotExist):
+        return render(request, 'listasHorarios/secciones_h.html', {
+            'question': horario,
+            'error_message': "Ese Horario no existe, por favor escoja otro.",
         })
 
 
+@login_required
+def CrearHorario(request, id):
+    trimestre = Trimestre.objects.filter(id=id)
+    if request.method == "POST":
+        form = HorarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = HorarioForm()
+    return render(request, 'horario/horarios_form.html', context={'form': form, 'trimestre': trimestre})
+
+
+@login_required
+def HorarioUpdate(request, id):
+    horario = get_object_or_404(Horarios, id=id)
+    trimestre = Trimestre.objects.filter(codigo__icontains=horario.seccion.trimestre)
+    if request.method == "POST":
+        form = HorarioForm(request.POST, instance=horario)
+        if form.is_valid():
+            form.save()
+            redirect("horario/secciones")
+    else:
+        form = HorarioForm()
+    try:
+        posicion = json.loads(horario.posicion)
+        return (
+            render(request, "horario/horario_update.html",
+                   context={'horarios': horario, 'posicion': posicion, 'form': form, 'trimestre': trimestre},
+                   )
+        )
+    except (KeyError, Horarios.DoesNotExist):
+        return render(request, 'listasHorarios/secciones_h.html', {
+            'question': horario,
+            'error_message': "Ese Horario no existe, por favor escoja otro.",
+        })
+
+
+@login_required
+class DeleteHorario(generic.DeleteView):
+    model = Horarios
+    success_url = "horario/secciones"
+
+
+@login_required
 def Horario_profesor(request, nombre_profesor):
 
     profesor = get_list_or_404(PNF, nombre=nombre_profesor)
@@ -42,6 +111,7 @@ def Horario_profesor(request, nombre_profesor):
     )
 
 
+@login_required
 def Horario_salon(request, salon_id):
 
     salon = get_object_or_404(PNF, id=salon_id)
@@ -49,13 +119,13 @@ def Horario_salon(request, salon_id):
     try:
         profesor = Profesores.objects.filter(pnf__nombre=salon)
         return (
-            render(request, "salon_h.html",
+            render(request, "listasHorarios/salon_h.html",
                    context={'profesor': profesor, 'salon': salon},
                    )
         )
     except (KeyError, Profesores.DoesNotExist):
         return render(request, 'horario/lista.html', {
-            'question': profesor,
+            'question': salon,
             'error_message': "Ese PNF no existe, por favor escoja otro.",
         })
 
@@ -63,27 +133,23 @@ def Horario_salon(request, salon_id):
 def listaSeccionHorario(request):
 
     secciones = Secciones.objects.all()
-    horarios = Horarios.objects.only("seccion")
+    horarios = Horarios.objects.all()
+
     seccio = []
     for i in horarios:
         seccio.append(i.seccion)
 
-
     return (
         render(request, "listasHorarios/secciones_h.html",
-               context={'secciones': secciones, 'conHorario': seccio},
+               context={'secciones': secciones, 'conHorario': seccio, 'horarios': horarios},
                )
     )
-
-
-def redireccion(request):
-    if request.method == "POST":
-        return redirect('home')
 
 
 #                                              ################# Materias ##################
 
 
+@login_required
 def crearMateria(request):
     if request.method == "POST":
         form = MateriaForm(request.POST)
@@ -98,6 +164,7 @@ class ListMaterias(generic.ListView):
     model = Materias
 
 
+@login_required
 class UpdateMaterias(generic.UpdateView):
     model = Materias
     fields = ['nombre', 'codigo', 'unidadesC']
@@ -105,6 +172,7 @@ class UpdateMaterias(generic.UpdateView):
     success_url = 'materias'
 
 
+@login_required
 class DeleteMaterias(generic.DeleteView):
     model = Materias
     fields = ['nombre', 'codigo', 'unidadesC']
@@ -190,7 +258,30 @@ class ListTrimestre(generic.ListView):
     model = Trimestre
     template_name = 'horario/listaTrimestre.html'
 
+
+class CrearTrimestre(generic.CreateView):
+    model = Trimestre
+    template_name = 'horario/generic_form.html'
+
+
+class TrimestreDetail(generic.DetailView):
+    model = Trimestre
+
+
+class TrimestreUpdate(generic.UpdateView):
+    model = Trimestre
+    template_name = 'horario/generic_form.html'
+
+
+class TrimestreDelete(generic.DeleteView):
+    model = Trimestre
+    template_name = 'horario/delete_form.html'
+
 #                                   ################# Secciones ##################
+
+
+class SeccionDetail(generic.DetailView):
+    model = Secciones
 
 
 class ListaSecciones(generic.ListView):

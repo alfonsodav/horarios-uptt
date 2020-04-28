@@ -1,6 +1,9 @@
 {% extends 'base_home.html' %}
 {% block content %}
 <div>
+    <div>
+        <h3>Horario de la seccion: {{ horarios.seccion }} Trimestre: {{ horarios.seccion.trimestre }}</h3>
+    </div>
     <form class="field has-text-centered" method="post" >{% csrf_token %}
         <span>{{ form.codigo }}</span>
         <span>{{ form.seccion }}</span>
@@ -10,54 +13,118 @@
         <input class="control" type="submit">
     </form>
 </div>
-<table class="table">
-    <thead>
-    <th>
-        hora
-    </th>
-    <th>
-        Lunes
-    </th>
-    <th>
-        martes
-    </th>
-    <th>
-        Miercoles
-    </th>
-    <th>
-        Jueves
-    </th>
-    <th>
-        Viernes
-    </th>
-    <th>
-        sabado
-    </th>
-    <th>
-        domingo
-    </th>
-    </thead>
-    <tbody>
-    {% for i in "abcdefghijklmnop"%}
-    <tr>
-    <td class="hora">
+    <table class="table">
+        <thead>
+        <th>
+            hora
+        </th>
+        <th>
+            Lunes
+        </th>
+        <th>
+            martes
+        </th>
+        <th>
+            Miercoles
+        </th>
+        <th>
+            Jueves
+        </th>
+        <th>
+            Viernes
+        </th>
+        <th>
+            sabado
+        </th>
+        <th>
+            domingo
+        </th>
+        </thead>
+        <tbody>
+        {% for i in "abcdefghijklmnop"%}
+            <tr>
+                <td class="hora">
+                </td>
+                {% for foo in "lmMjvsd" %}
+                    <td class="objetivo" 
+                            {% for p in posicion %}
+                                {% if foo == p.dia and i == p.hora %}
+                                    id={{ foo }} name={{ i }}> {{ p.codigo }}</td><span class="is-hidden"
+                                {% endif %}
+                            {% endfor %}
+                    id={{ foo }} name={{ i }}> vacio</span> </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="mt-3 mb-5">
+        <table class="table">
+            {% for T in trimestre %}
+                {% for materia in T.materias.all %}
+                    <td class="horas" id={{ materia.codigo }}>{{ materia.nombre }}</td>
+                {% endfor %}
+            {% endfor %}
+        </table>
+    </div>
+    {{ posicion|json_script:"json"}}
+<script>
+function Horario(dia, hora, codigo){
+	this.dia= dia;
+	this.hora= hora;
+	this.codigo= codigo;
+}
+let objetivo = null;
+let nombre = "vacio";
+let registro = null;
+let myjson = document.getElementById("json").textContent;
+let para = JSON.parse(JSON.parse(JSON.stringify(myjson)));
+let enarray = true;
+console.log(para);
+$(document).ready(function() {
 
-    </td>
-    {% for foo in "lmMjvsd" %}
-    <td class="objetivo" id={{ foo }} name={{ i }}> {{ foo }} vacio </td>
-    {% endfor %}
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
-<div class="mt-3 mb-5">
-<table class="table">
-{% for T in trimestre %}
-    {% for materia in T.materias.all %}
-    <td class="horas" id={{ materia.codigo }}>{{ materia.nombre }}</td>
-    {% endfor %}
-{% endfor %}
-</table>
-</div>
+    $('.objetivo').click(function (event) {
+        if (objetivo == null) {
+            alert("primero debes seleccionar una materia")
+        } else {
+            let div = $(this);
+            let dia = div.attr("id");
+            let hora = div.attr("name");
+            let enarray = true;
+            div.text(nombre);
+            if (registro != null) {
+                registro = new Horario(dia, hora, nombre);
+                for (let i=0; i < para.length; i++ ){
+                if ( registro.dia == para[i].dia && registro.hora == para[i].hora )
+                {
+                    para[i].codigo= registro.codigo;
+                    enarray= false;
+                }
+                }
+            } else {
+                registro = new Horario(dia, hora, nombre);
+                for (let i=0; i < para.length; i++ ){
+                if ( registro.dia == para[i].dia && registro.hora == para[i].hora )
+                {
+                    para[i].codigo= registro.codigo;
+                    enarray= false;
+                }
+            }
+
+        }
+            if (enarray){
+                para.push(registro);
+            }
+            $('#id_posicion').text( JSON.stringify(para) );
+    }
+    });
+    $('#id_posicion').text( JSON.stringify(para) );
+
+    $('.horas').click(function (event) {
+        objetivo = $(this).attr("id");
+        nombre = document.getElementById(objetivo).textContent;
+    });
+});
+</script>
 {% endblock %}
 

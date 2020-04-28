@@ -168,7 +168,7 @@ ul, ol {
 .footer{
     bottom: 0;
     width: 100%;
-    position: fixed;
+    position: relative;
     padding: 1% !important;
 }
 .navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
@@ -196,62 +196,62 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:f
     margin: 3rem;
 }
 .ml-1{
-    margin: 0.5rem;
+    margin-left: 0.5rem;
 }
 .ml-2{
-    margin: 1rem;
+    margin-left: 1rem;
 }
 .ml-3{
-    margin: 1.5rem;
+    margin-left: 1.5rem;
 }
 .ml-4{
-    margin: 2rem;
+   margin-left: 2rem;
 }
 .ml-5{
-    margin: 3rem;
+    margin-left: 3rem;
 }
 .mr-1{
-    margin: 0.5rem;
+    margin-right: 0.5rem;
 }
 .mr-2{
-    margin: 1rem;
+    margin-right: 1rem;
 }
 .mr-3{
-    margin: 1.5rem;
+    margin-right: 1.5rem;
 }
 .mr-4{
-    margin: 2rem;
+    margin-right: 2rem;
 }
 .mr-5{
-    margin: 3rem;
+    margin-right: 3rem;
 }
-.m-1{
-    margin: 0.5rem;
+.mt-1{
+    margin-top: 0.5rem;
 }
 .mt-2{
-    margin: 1rem;
+    margin-top: 1rem;
 }
 .mt-3{
-    margin: 1.5rem;
+    margin-top: 1.5rem;
 }
 .mt-4{
-    margin: 2rem;
+    margin-top: 2rem;
 }
 .mt-5{
-    margin: 3rem;
+    margin-top: 3rem;
 }
 .mb-1{
-    margin: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 .mb-2{
-    margin: 1rem;
+    margin-bottom: 1rem;
 }
 .mb-3{
-    margin: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 .mb-4{
-    margin: 2rem;
+    margin-bottom: 2rem;
 }
 .mb-5{
-    margin: 3rem;
+    margin-bottom: 3rem;
 }

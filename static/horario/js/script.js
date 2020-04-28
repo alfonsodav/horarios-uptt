@@ -1,39 +1,22 @@
 function popUp(URL) {
-    window.open(URL, 'profesor', 'toolbar=0,location=0,statusbar=0,menubar=0,resizable=1,width=500,height=350,left = 390,top = 50');
-
+	window.open(URL, 'profesor', 'toolbar=0,location=0,statusbar=0,menubar=0,resizable=1,width=500,height=350,left = 390,top = 50');
 }
-function Horario(dia, hora, codigo){
-	this.dia= dia;
-	this.hora= hora;
-	this.codigo= codigo;
-}
-let objetivo = null;
-let nombre = "vacio";
-let registro = null;
-let myjson = null
-	$(document).ready(function(){
+$(document).ready(function() {
+	let hora= 39600000;
+	let minutos= 2700000;
+	let i=0;
 
-	$('.objetivo').click(function(event) {
-		if (objetivo == null){
-			alert("primero debes seleccionar una materia")
-		}else {
-		let div = $(this);
-		let dia = div.attr("id");
-		let hora = div.attr("name");
-		div.text(nombre);
-		if (registro!=null){
-			myjson = myjson + ","+ JSON.stringify( registro);
-			console.log(myjson);
-		}else {
-			registro = new Horario(dia, hora, objetivo);
-			myjson = JSON.stringify(registro);
-			console.log(myjson);
+	let m= hora;
+	$('.hora').before(function () {
+		if(i<1){
+		$(this).text(new Date(hora).getHours() +":"+ new Date(0).getMinutes() );
+		m = m + minutos;
+		}else{
+			$(this).text(new Date(m).getHours() +":"+ new Date(m).getMinutes() );
+			m = m + minutos;
 		}
-	}
-	});
+		i++;
 
-	$('.horas').click(function(event) {
-		objetivo = $(this).attr("id");
-		nombre = document.getElementById(objetivo).textContent;
-	})
+	});
 });
+

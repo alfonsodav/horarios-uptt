@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="static/images/icon.png">
+    <meta name="description" content=" Sistema para el Creacion y Gestión de horarios">
+    <meta name="keywords" content="UPTT, Gestion de Horarios, Alfonso, Leonel">
+    <title>Sistema de Horario UPTT</title>
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'horario/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'horario/css/bulma.css' %}">
+    <link rel="stylrsheet" href="{% static 'horario/iconos/css/fontawesome.css' %}">
+    <script src="{% static 'horario/iconos/js/all.js' %}"></script>
+    <script src="{% static 'horario/js/jquery.js' %}"></script>
+    <script src="{% static 'horario/js/script.js' %}"></script>
+
+</head>
+<body>
+<header class="head">
+    <div class="titulo navbar-brand">
+        <a href="/" >
+            <img class="upttlogo image" src="{% static 'horario/images/uptt.png' %}" width="60px" height="60px">
+            <h3 class="is-4 is-vertical">Sistema de Horario UPTT</h3>
+        </a>
+    </div>
+</header>
+<div class="container">
+    <div class="subtitle mt-5">
+        <p class=" has-text-weight-bold">debe iniciar sesion</p>
+    </div>
+<form action="" class="section field has-text-centered m-5" method="post">
+    {% csrf_token %}
+        <label class="">Nombre de usuario: <input type="text" name="username" required></label>
+        <label>Contraseña: <input type="password" name="password" required></label>
+
+        <button type="submit">Login</button>
+    </form>
+</form>
+</div>
+</body>
+</html>

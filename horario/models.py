@@ -76,11 +76,11 @@ class Secciones(models.Model):
 class Horarios(models.Model):
     codigo = models.CharField(max_length=10, default=None)
     seccion = models.ForeignKey(Secciones, null=True, on_delete=models.CASCADE)
-    posicion = models.TextField(max_length=500, default=None)
+    posicion = models.TextField(max_length=5000, default=None)
 
     class Meta:
         ordering = ["codigo"]
-        verbose_name_plural = "Secciones"
+        verbose_name_plural = "Horarios"
 
     def __str__(self):  # __unicode__ en Python 3
         return self.codigo

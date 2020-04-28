@@ -1,5 +1,5 @@
 from django import forms
-from .models import Materias, PNF
+from .models import Materias, Horarios
 
 
 class MateriaForm(forms.ModelForm):
@@ -8,7 +8,10 @@ class MateriaForm(forms.ModelForm):
         fields = ('nombre', 'codigo', 'unidadesC')
 
 
-class ProfesoresForm(forms.Form):
-    nombre = forms.CharField(widget=forms.Textarea)
+class HorarioForm(forms.ModelForm):
+    class Meta:
+        model = Horarios
+        fields = ('codigo', 'seccion', 'posicion')
+
 
 

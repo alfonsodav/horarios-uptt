@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,22 +17,6 @@
     <script src="{% static 'horario/js/jquery.js' %}"></script>
     <script src="{% static 'horario/js/script.js' %}"></script>
 
-<script>
-$("#showModal").click(function () {
-    $(".modal").addClass("is-active");
-    console.log("modal cliqueado");
-});
-$(".modal-close").click(function () {
-    $(".modal").removeClass("is-active");
-    console.log("modal cliqueado");
-});
-function activo() {
-    $(".modal").addClass("is-active");
-}
-function cerrar() {
-    $(".modal").removeClass("is-active");
- }
-</script>
 </head>
 <body>
 <header class="head">
@@ -46,7 +30,7 @@ function cerrar() {
         <div class="navbar-item has-dropdown is-hoverable ">
             <a  href="{% url 'profesores' %}"  class="navbar-link"><i class="fas fa-user"></i>profesores</a>
             <div class="navbar-dropdown">
-            <a href="{% url 'profesores' %}" class="navbar-item">Primer año</a>
+            <a href="{% url 'nuevo profesor' %}" class="navbar-item">Registrar Profesor</a>
             </div>
 
         </div>
@@ -58,20 +42,34 @@ function cerrar() {
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
             <a href="{% url 'lista de secciones' %}" class="navbar-link"><i class="fa fa-clock"></i>Secciones</a>
+            <div class="navbar-dropdown">
+                <a href="{% url 'crear seccion' %}" class="navbar-item">Nueva Seccion</a>
+            </div>
         </div>
-         <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"><i class="fa fa-chalkboard-teacher"></i>Salones</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a href="{% url 'trimestres' %}" class="navbar-link"><i class="fa fa-chalkboard-teacher"></i>Trimestres</a>
+             <div class="navbar-dropdown">
+                <a href="{% url 'nuevo trimestre' %}" class="navbar-item">Nuevo Trimestre</a>
+            </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a href="{% url 'home' %}" class="navbar-link"><i class="fa fa-chalkboard-teacher"></i>Salones</a>
+             <div class="navbar-dropdown">
+                <a href="{% url 'home' %}" class="navbar-item">Nuevo Salon</a>
+            </div>
         </div>
         <div class="navbar-end">
             <div class="navbar-item is-hoverable is-right">
-                <a class="navbar-link is-arrowless"><i class="fa fa-times-circle"></i>Salir</a>
+                {% if user.is_authenticated %}
+                <h4>{{ user.username }}</h4><a href="{% url "salir" %}" class="navbar-link is-arrowless"><i class="fa fa-times-circle"></i>Salir</a>
+                {% endif %}
             </div>
         </div>
     </div>
 </header>
 <section class="section">
     <div class="container">
-        <h1 class="title">hola usuario</h1>
+    <h1 class="title">!Hola {{ user.username }}¡</h1>
         {% block content %}{% endblock %}
     </div>
 </section>
@@ -89,5 +87,5 @@ function cerrar() {
 </body>
 </html>
 
-<body>
+
 

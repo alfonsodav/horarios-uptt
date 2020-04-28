@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls.static import static
+
 from django.urls import path, include
 from horario import views
 from django.conf import settings
+
 
 admin.AdminSite.site_header = "Uptt Administrador de Horario"
 admin.AdminSite.site_title = "Uptt Administrador de Horario"
@@ -27,6 +29,7 @@ urlpatterns = [
     # ################# admin e index ##################
     path('admin/', admin.site.urls),
     path('', views.index, name="home"),
+    path('salir', views.logout_view, name="salir"),
     # ################# Materias ##################
     path('materias/', views.ListMaterias.as_view(), name='materia'),
     path('materia-nueva/', views.crearMateria, name='materia nueva'),
@@ -48,22 +51,30 @@ urlpatterns = [
     path('pnf-profesor/<slug:pnf_nombre>', views.Profesor_Pnf, name='pnf del profesor'),
     # ################# Trimestre ##################
 
-    path('trimestre', views.ListTrimestre.as_view(), name="trimestre"),
+    path('trimestre', views.ListTrimestre.as_view(), name="trimestres"),
+    path('nuevo-trimestre', views.CrearTrimestre.as_view(),  name="nuevo trimestre"),
+    path('trimestre/<int:pk>', views.TrimestreUpdate.as_view(), name='actualizar trimestre'),
+    path('borrar-trimestre/<int:pk>', views.TrimestreDelete.as_view(), name='actualizar trimestre'),
 
     # ################# Salones ##################
 
 
     # ################# Secciones ##################
     path('secciones', views.ListaSecciones.as_view(), name='lista de secciones'),
+    path('secion', views.SeccionDetail.as_view(), name="SeccionDetail"),
     path('seccion-nueva', views.CrearSecciones.as_view(), name='crear seccion'),
     path('secciones/<int:pk>', views.UpdateSecciones.as_view(), name='actualizar seccion'),
     path('borrar-seccion/<int:pk>', views.DeleteSecciones.as_view(), name='borrar seccion'),
 
     # ################# Horarios ##################
 
+    path('horario-nuevo/<int:id>', views.CrearHorario, name='horario nuevo'),
+    path('horario/<int:id>', views.HorarioDetail, name="detalles de horario"),
+    path('editar-horario/<int:id>', views.HorarioUpdate, name="editar horario"),
     path('horario/profesores', views.Horario_profesor, name='horario de profesores'),
     path('horario/salones', views.Horario_salon, name='horario de salones'),
     path('horario/secciones', views.listaSeccionHorario, name='horario de secciones'),
+
 
 
 
