@@ -33,13 +33,13 @@ urlpatterns = [
     # ################# Materias ##################
     path('materias/', views.ListMaterias.as_view(), name='materia'),
     path('materia-nueva/', views.crearMateria, name='materia nueva'),
-    path('materia/<int:pk>', views.UpdateMaterias, name='actualizar materia'),
-    path('borrar-materia/<int:pk>', views.DeleteMaterias, name='borrar materia'),
+    path('materia/<int:pk>', views.UpdateMaterias.as_view(), name='actualizar materia'),
+    path('borrar-materia/<int:pk>', views.DeleteMaterias.as_view(), name='borrar materia'),
 
     # ################# PNF ##################
 
-    path('pnf', views.ListPNF.as_view(), name='lista de pnf'),
-    path('pnf-nuevo/', views.CrearPNF.as_view(), name='pnf'),
+    path('pnf', views.ListPNF.as_view(), name='pnf'),
+    path('pnf-nuevo/', views.CrearPNF.as_view(), name='nuevo pnf'),
     path('pnf/<int:pk>', views.UpdatePNF.as_view(), name='actualizar-pnf'),
     path('borrar-pnf/<int:pk>', views.DeletePNF.as_view(), name='borrar-pnf'),
 
@@ -71,7 +71,9 @@ urlpatterns = [
     path('horario-nuevo/<int:id>', views.CrearHorario, name='horario nuevo'),
     path('horario/<int:id>', views.HorarioDetail, name="detalles de horario"),
     path('editar-horario/<int:id>', views.HorarioUpdate, name="editar horario"),
-    path('horario/profesores', views.Horario_profesor, name='horario de profesores'),
+    path('borrar-horario/<int:pk>', views.DeleteHorario.as_view, name='borrar horario'),
+    path('horario-profe/<slug:id_profesor>', views.Horario_profesor, name='horario de profesor'),
+    path('horario/profesores', views.listaProfesorHorario, name='horario de profesores'),
     path('horario/salones', views.Horario_salon, name='horario de salones'),
     path('horario/secciones', views.listaSeccionHorario, name='horario de secciones'),
 

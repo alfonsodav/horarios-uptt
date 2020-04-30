@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+    <h5 class="mt-3 has-shadow">Profesores sin Horarios </h5>
+</div>
+
+<table class="table table-container  has-text-centered ">
+<thead class="has-text-centered">
+<th>
+    Nombre
+</th>
+<th>
+    PNF
+</th>
+<th>
+    Materias
+</th>
+
+</thead>
+<tbody class="has-text-weight-bold ">
+{% for i in secciones %}
+    {% if i not in  conHorario %}
+<tr>
+    <td>
+        {{ i}}
+    </td>
+    <td>
+        {{ i.pnf }}
+    </td>
+    <td>
+        {% for m in i.materias.all %}
+            <li class="list-item ">{{ m }}</li>
+        {% endfor %}
+    </td>
+
+</tr>
+    {% endif %}
+{% endfor %}
+</tbody>
+</table>
+
+<div class="content">
+    <h5 class="m-3 has-shadow">Secciones con Horarios </h5>
+</div>
+<table class="table table-container  has-text-centered ">
+<thead class="has-text-centered">
+<th>
+    Codigo
+</th>
+<th>
+    PNF
+</th>
+<th>
+    Materias
+</th>
+
+<th>
+    Ver horario
+</th>
+</thead>
+<tbody class="has-text-weight-bold ">
+
+{% for i in conHorario  %}
+
+<tr>
+    <td>
+        {{ i}}
+    </td>
+    <td>
+        {{ i.pnf }}
+    </td>
+    <td>
+        {% for m in i.materias.all %}
+            <li class="list-item ">{{ m }}</li>
+        {% endfor %}
+    </td>
+    <td>
+        <a href="{% url 'horario de profesor' i.id %}"><i class="fa fa-eye has-text-info has-text-centered"></i></a>
+    </td>
+</tr>
+
+
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

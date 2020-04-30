@@ -35,10 +35,10 @@
         <li class="list-item ">{{ m }}</li>
     {% endfor %}
     </td>
-    <td id="showModal" class="has-text-centered">
-        <i class="fa fa-edit has-text-info has-text-centered" onclick="popUp('profesor/{{ i.id }}')"></i>
+    <td class="actions">
+        <i class="fa fa-edit has-text-info is-center" onclick="popUp('profesor/{{ i.id }}')"></i>
     </td>
-    <td>
+    <td class="actions">
         <i class="fa fa-times has-text-danger is-center"  onclick="popUp('borrar-profesor/{{ i.id }}')" title="borrar profesor" ></i>
     </td>
 

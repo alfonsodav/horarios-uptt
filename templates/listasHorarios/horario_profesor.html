@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+    <h3>Horario del Profesor: {{ profesor.nombre }}</h3>
+    <ol class="list">Con las Secciones:
+        {% for horario in horarios %}
+            <li class="list-item">{{ horario.seccion }}</li>
+        {% endfor %}
+    </ol>
+
+
+    </div>
+    <table class="table mb-4">
+        <thead>
+        <th>
+            hora
+        </th>
+        <th>
+            Lunes
+        </th>
+        <th>
+            martes
+        </th>
+        <th>
+            Miercoles
+        </th>
+        <th>
+            Jueves
+        </th>
+        <th>
+            Viernes
+        </th>
+        <th>
+            sabado
+        </th>
+        <th>
+            domingo
+        </th>
+        </thead>
+        <tbody>
+        {% for i in "abcdefghijklmnop"%}
+            <tr>
+                <td class="hora">
+                </td>
+                {% for foo in "lmMjvsd" %}
+                    <td
+                            {% for p in posicion %}
+                                {% if foo == p.dia and i == p.hora %}
+                                    id={{ foo }} name={{ i }}> <p>{{ p.codigo }}</p> </td><span class="is-hidden"
+                                {% endif %}
+                            {% endfor %}
+                    id={{ foo }} name={{ i }}> vacio</span> </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

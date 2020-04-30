@@ -3,10 +3,19 @@
 <table class="table table-container ">
 <thead>
 <th>
-    nombre
+    Codigo
+</th>
+<th>
+    Trayecto
 </th>
 <th>
     Materias
+</th>
+<th>
+    Editar
+</th>
+<th>
+    Eliminar
 </th>
 </thead>
 <tbody class="has-text-weight-bold">
@@ -16,10 +25,19 @@
         {{ i.codigo }}
     </td>
 <td>
+    {{ i.Trayecto }}
+</td>
+<td>
     {% for m in i.materias.all %}
-        <li>{{ m }}</li>
+        <li class="list-item">{{ m }}</li>
     {% endfor %}
 </td>
+<td class="actions">
+        <i class="fa fa-edit has-text-info has-text-centered" onclick="popUp('trimestre/{{ i.id }}')" title="Editar Trimestre"></i>
+    </td>
+    <td class="actions">
+        <i class="fa fa-times has-text-danger is-center"  onclick="popUp('/borrar-trimestre/{{ i.id }}')" title="borrar Trimestre" ></i>
+    </td>
 </tr>
 {% endfor %}
 </tbody>

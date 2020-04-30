@@ -66,8 +66,9 @@ thead{
     height:60px;
     float: left;
 }
-.titulo{
-
+.actions svg, .fa{
+    cursor: pointer;
+    margin: 1rem !important;
 }
 .head{
     display: inline-flex;

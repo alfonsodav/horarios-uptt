@@ -1,0 +1,3 @@
+  {% for h in horarios %}
+        {% if p.codigo in h.seccion.trimestre.materias.all|escape %}<p>{{ h.seccion }}</p>{% endif %}
+    {% endfor %}

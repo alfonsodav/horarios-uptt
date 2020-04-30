@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-container ">
+<thead>
+<th>
+    Nombre
+</th>
+<th>
+    Trimestre
+</th>
+<th>
+    Profesores
+</th>
+<th>
+    Editar
+</th>
+<th>
+    Eliminar
+</th>
+</thead>
+<tbody class="has-text-weight-bold">
+{% for i in object_list %}
+<tr>
+    <td>
+        {{ i.nombre }}
+    </td>
+<td>
+    {{ i.trimetres }}
+</td>
+<td>
+    <a href="{% url 'pnf del profesor' i.nombre %}">ver</a>
+</td>
+<td class="actions">
+        <i class="fa fa-edit has-text-info has-text-centered" onclick="popUp('pnf/{{ i.id }}')" title="Editar PNF"></i>
+    </td>
+    <td class="actions">
+        <i class="fa fa-times has-text-danger is-center"  onclick="popUp('borrar-pnf/{{ i.id }}')" title="borrar PNF" ></i>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

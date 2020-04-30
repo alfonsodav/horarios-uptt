@@ -11,6 +11,12 @@
 <th>
     Unidades Curriculares
 </th>
+<th>
+    Editar
+</th>
+<th>
+    Eliminar
+</th>
 </thead>
 <tbody class="has-text-weight-bold">
 {% for i in object_list %}
@@ -23,6 +29,12 @@
     </td>
     <td>
         {{ i.unidadesC }}
+    </td>
+    <td class="actions">
+        <i class="fa fa-edit has-text-info has-text-centered" onclick="popUp('/materia/{{ i.id }}')" title="Editar Materia"></i>
+    </td>
+    <td class="actions">
+        <i class="fa fa-times has-text-danger is-center"  onclick="popUp('/borrar-materia/{{ i.id }}')" title="borrar Materia" ></i>
     </td>
 </tr>
 {% endfor %}

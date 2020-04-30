@@ -44,11 +44,11 @@
         <li class="list-item ">{{ p }}</li>
     {% endfor %}
     </td>
-    <td id="showModal" class="has-text-centered">
-        <i class="fa fa-edit has-text-info has-text-centered" onclick="popUp('secciones/{{ i.id }}')"></i>
+    <td class="actions">
+        <i class="fa fa-edit has-text-info has-text-centered" onclick="popUp('secciones/{{ i.id }}')" title="Editar Seccion"></i>
     </td>
-    <td id="showModal" class="has-text-centered">
-        <i class="delete has-text-centered" onclick="popUp('borrar-seccion/{{ i.id }}')"></i>
+    <td class="actions">
+        <i class="fa fa-times has-text-centered" onclick="popUp('borrar-seccion/{{ i.id }}')" title="Borrar Seccion"></i>
     </td>
 
 </tr>

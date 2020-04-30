@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, get_list_or_40
 from django.views import generic
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Materias, PNF, Profesores, Secciones, Trimestre, Horarios, Salones
 from .form import MateriaForm, HorarioForm
 import json
@@ -93,22 +94,36 @@ def HorarioUpdate(request, id):
         })
 
 
-@login_required
-class DeleteHorario(generic.DeleteView):
+class DeleteHorario(LoginRequiredMixin, generic.DeleteView):
     model = Horarios
     success_url = "horario/secciones"
 
 
 @login_required
-def Horario_profesor(request, nombre_profesor):
+def Horario_profesor(request, id_profesor):
 
-    profesor = get_list_or_404(PNF, nombre=nombre_profesor)
+    profesor = get_object_or_404(Profesores, id=id_profesor)
+    horario = Horarios.objects.filter(seccion__profesores=profesor)
+    posicion = []
 
-    return (
-        render(request, "profe-pnf.html",
-               context={'profesor': profesor, },
-               )
-    )
+    try:
+        for h in horario:
+            posiciones = json.loads(h.posicion)
+            for i in posiciones:
+                for m in profesor.materias.all():
+                    if m.nombre in str(i):
+                        posicion.append(i)
+
+        return (
+            render(request, "listasHorarios/horario_profesor.html",
+                   context={'horarios': horario, 'posicion': posicion, 'profesor': profesor},
+                   )
+        )
+    except (KeyError, Horarios.DoesNotExist):
+        return render(request, 'listasHorarios/secciones_h.html', {
+            'question': horario,
+            'error_message': "Ese Horario no existe, por favor escoja otro.",
+        })
 
 
 @login_required
@@ -146,6 +161,24 @@ def listaSeccionHorario(request):
     )
 
 
+def listaProfesorHorario(request):
+
+    profesores = Profesores.objects.all()
+    horarios = Horarios.objects.all()
+
+    profe = []
+    for i in horarios:
+        for p in i.seccion.profesores.all():
+            if p not in profe:
+                profe.append(p)
+
+    return (
+        render(request, "listasHorarios/profesores_h.html",
+               context={'secciones': profesores, 'conHorario': profe, 'horarios': horarios},
+               )
+    )
+
+
 #                                              ################# Materias ##################
 
 
@@ -164,15 +197,13 @@ class ListMaterias(generic.ListView):
     model = Materias
 
 
-@login_required
-class UpdateMaterias(generic.UpdateView):
+class UpdateMaterias(LoginRequiredMixin, generic.UpdateView):
     model = Materias
     fields = ['nombre', 'codigo', 'unidadesC']
     template_name = 'horario/generic_form.html'
     success_url = 'materias'
 
 
-@login_required
 class DeleteMaterias(generic.DeleteView):
     model = Materias
     fields = ['nombre', 'codigo', 'unidadesC']
@@ -261,6 +292,7 @@ class ListTrimestre(generic.ListView):
 
 class CrearTrimestre(generic.CreateView):
     model = Trimestre
+    fields = '__all__'
     template_name = 'horario/generic_form.html'
 
 
@@ -270,6 +302,7 @@ class TrimestreDetail(generic.DetailView):
 
 class TrimestreUpdate(generic.UpdateView):
     model = Trimestre
+    fields = '__all__'
     template_name = 'horario/generic_form.html'
 
 
