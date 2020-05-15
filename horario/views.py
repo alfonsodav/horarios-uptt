@@ -35,6 +35,12 @@ def redireccion(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+
+def confirmado(request):
+    return render(request, 'confirmado.html')
+
+
 #                                              ################# Horarios ##################
 
 
@@ -201,14 +207,14 @@ class UpdateMaterias(LoginRequiredMixin, generic.UpdateView):
     model = Materias
     fields = ['nombre', 'codigo', 'unidadesC']
     template_name = 'horario/generic_form.html'
-    success_url = 'materias'
+    success_url = '/confirmado'
 
 
 class DeleteMaterias(generic.DeleteView):
     model = Materias
     fields = ['nombre', 'codigo', 'unidadesC']
     template_name = 'horario/delete_form.html'
-    success_url = 'materias'
+    success_url = '/confirmado'
 
 #                                              ################# PNF ##################
 
@@ -228,14 +234,14 @@ class UpdatePNF(generic.UpdateView):
     fields = ['nombre', 'trimetres']
 
     template_name = 'horario/generic_form.html'
-    success_url = '/'
+    success_url = '/confirmado'
 
 
 class DeletePNF(generic.DeleteView):
     model = PNF
     fields = ['nombre', 'trimetres']
     template_name = 'horario/delete_form.html'
-    success_url = '/'
+    success_url = '/confirmado'
 
 #                                              ################# Profesores ##################
 
@@ -250,14 +256,14 @@ class UpdateProfesor(generic.UpdateView):
     model = Profesores
     fields = ['nombre', 'pnf']
     template_name = 'horario/generic_form.html'
-    success_url = 'profesores'
+    success_url = '/confirmado'
 
 
 class DeleteProfesor(generic.DeleteView):
     model = Profesores
     fields = ['nombre', 'pnf']
     template_name = 'horario/delete_form.html'
-    success_url = '/'
+    success_url = '/confirmado'
 
 
 class ListProfesor(generic.ListView):
@@ -304,11 +310,13 @@ class TrimestreUpdate(generic.UpdateView):
     model = Trimestre
     fields = '__all__'
     template_name = 'horario/generic_form.html'
+    success_url = '/confirmado'
 
 
 class TrimestreDelete(generic.DeleteView):
     model = Trimestre
     template_name = 'horario/delete_form.html'
+    success_url = '/confirmado'
 
 #                                   ################# Secciones ##################
 
@@ -332,10 +340,10 @@ class UpdateSecciones(generic.UpdateView):
     model = Secciones
     fields = ['codigo', 'pnf', 'trimestre', 'modalidad', 'profesores']
     template_name = 'horario/generic_form.html'
-    success_url = 'secciones'
+    success_url = '/confirmado'
 
 
 class DeleteSecciones(generic.DeleteView):
     model = Secciones
     template_name = 'horario/delete_form.html'
-    success_url = 'secciones'
+    success_url = '/confirmado'

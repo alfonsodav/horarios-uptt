@@ -30,6 +30,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="home"),
     path('salir', views.logout_view, name="salir"),
+    path('confirmado', views.confirmado),
     # ################# Materias ##################
     path('materias/', views.ListMaterias.as_view(), name='materia'),
     path('materia-nueva/', views.crearMateria, name='materia nueva'),

@@ -25,7 +25,9 @@
         {{ i.nombre }}
     </td>
 <td>
-    {{ i.trimetres }}
+    {% for T in i.trimetres.all %}
+    <li class="list-item">{{ T }}</li>
+    {% endfor %}
 </td>
 <td>
     <a href="{% url 'pnf del profesor' i.nombre %}">ver</a>
